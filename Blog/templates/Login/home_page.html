@@ -1,0 +1,24 @@
+{% extends 'Login/base.html' %}
+{% block body_block %}
+<h1>Home Page</h1>
+
+
+{% for post in post_list %}
+<div class="jumbotron">
+    <h1>{{post.title}}</h1><hr>
+    <h5>Author: {{post.author}}</h5><hr>
+    <p>{{post.content}}</p>
+    <small>Posted on {{post.creation_date}}</small><br>
+    <a href="{% url 'Login:delete' pk=post.pk %}" ><button type="button" class="btn btn-danger btn-sm">Delete Post</button></a> &nbsp;
+    <a href="{% url 'Login:update' pk=post.pk %}" ><button type="button" class="btn btn-warning btn-sm">Edit Post</button></a>
+    <br><br>
+    <hr>
+    <a href="{% url 'Login:view_comment' pk=post.pk %}" >Comments: </a> {{post.comments.all|length}}
+    <a href="{% url 'Login:add_comment' pk=post.pk %}" style="float: right;" ><button  type="button" class="btn btn-primary btn-sm">Add Comment</button></a>
+    <br><br>
+</div>
+{% endfor %}
+
+
+
+{% endblock %}
